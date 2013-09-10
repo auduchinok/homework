@@ -19,10 +19,7 @@ bool checkBalance(char* str)
 			balance--;
 	}
 
-	if (balance == 0)
-		return true;
-	else
-		return false;
+	return (balance == 0);
 }
 
 void test1()
