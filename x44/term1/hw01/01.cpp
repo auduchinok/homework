@@ -1,11 +1,15 @@
+/*
+Eugene Auduchinok (c) 2013
+
+Homework 1.01.01
+x^4 + x^3 + x^2 + x
+*/
+
 #include <iostream>
 using namespace std;
 
 int main()
 {
-	cout << "Homework 1.01.01" << endl;
-	cout << "x^4 + x^3 + x^2 + x" << endl;
-
 	int x = 0;
 
 	cout << "x: ";

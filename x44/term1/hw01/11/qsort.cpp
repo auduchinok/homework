@@ -1,5 +1,11 @@
+/*
+Eugene Auduchinok (c) 2013
+
+QuickSort
+*/
+
 #include "qsort.h"
-#include <istream>
+#include <iostream>
 
 void qsortRecursive(int* a, int n, int low, int high)
 {

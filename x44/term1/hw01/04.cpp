@@ -1,4 +1,6 @@
 /*
+Eugene Auduchinok (c) 2013
+
 Homework 1.01.04
 Lucky tickets
 */

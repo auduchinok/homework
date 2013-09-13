@@ -1,3 +1,10 @@
+/*
+Eugene Auduchinok (c) 2013
+
+Homework 1.01.08
+Factorials
+*/
+
 #include <iostream>
 using namespace std;
 
@@ -47,9 +54,6 @@ void runTests()
 
 int main()
 {
-	cout << "Homework 1.01.08" << endl;
-	cout << "Factorials" << endl;
-
 	runTests();
 
 	int n = 0;

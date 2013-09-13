@@ -1,5 +1,7 @@
 /*
-Homework 1.01.05
+Eugene Auduchinok (c) 2013
+
+Homework 1.01.07
 Prime nums
 */
 

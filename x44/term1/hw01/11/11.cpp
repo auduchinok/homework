@@ -1,7 +1,9 @@
 /*
- Homework 1.01.11
- QuickSort
- */
+Eugene Auduchinok (c) 2013
+
+Homework 1.01.11
+QuickSort
+*/
 
 #include <iostream>
 #include <cstdlib>

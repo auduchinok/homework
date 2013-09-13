@@ -1,3 +1,10 @@
+/*
+Eugene Auduchinok (c) 2013
+
+Homework 1.01.05
+Brackets balance
+*/
+
 #include <iostream>
 #include <cstring>
 using namespace std;
@@ -46,7 +53,7 @@ bool test2()
 		cout << "Wrong." << endl;
 }
 
-void runTests() // Стоит выносить в отдельную функцию?
+void runTests()
 {
 	test1();
 	test2();
@@ -54,9 +61,6 @@ void runTests() // Стоит выносить в отдельную функц�
 
 int main()
 {
-	cout << "Homework 1.01.05" << endl;
-	cout << "Brackets balance" << endl;
-
 	runTests(); 
 
 	char str[100] = {0};
