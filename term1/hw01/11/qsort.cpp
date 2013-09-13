@@ -1,7 +1,7 @@
 #include "qsort.h"
 #include <istream>
 
-void qsortRecursive(int*& a, int& n, int low, int high)
+void qsortRecursive(int* a, int n, int low, int high)
 {
     if (n < 2)
 		return;
@@ -38,7 +38,7 @@ void qsortRecursive(int*& a, int& n, int low, int high)
         qsortRecursive(a, n, l, high);
 }
 
-void qsort(int *a, int& n)
+void qsort(int *a, int n)
 {
     qsortRecursive(a, n, 0, n - 1);
 }
