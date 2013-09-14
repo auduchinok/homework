@@ -67,11 +67,11 @@ int main()
 
 	char s[100] = {0};
 	cout << "s: ";
-	cin >> s;
+	cin.getline(s, 100);
 
 	char s1[50] = {0};
 	cout << "s1: ";
-	cin >> s1;
+	cin.getline(s1, 50);
 
 	cout << countSubstrings(s, s1) << " substring(s)" << endl;
 }
