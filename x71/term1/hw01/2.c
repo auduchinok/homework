@@ -29,7 +29,7 @@ int isPalindrome(char *str)
 		if (l >= r)
 			return 1;
 
-		if (str[l] != str[r])
+		if (tolower(str[l]) != tolower(str[r]))
 		{
 			return 0;
 		}
