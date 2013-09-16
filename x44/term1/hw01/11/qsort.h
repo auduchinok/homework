@@ -1,7 +1,4 @@
-#ifndef qsort_h
-#define qsort_h
+#pragma once
 
 void qsort(int* a, int n);
 void qsortRecursive(int* a, int n);
-
-#endif

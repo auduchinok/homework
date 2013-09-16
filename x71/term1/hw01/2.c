@@ -43,17 +43,9 @@ int isPalindrome(char *str)
 
 int main()
 {
-	char str[100];
-	int i;
-	char nextChar;
-
-	for (i = 0; nextChar != '\n'; i++)
-	{
-		nextChar = getchar();
-		str[i] = nextChar;
-	}
-
-	// Is it possible to read a line using scanf() function?
+	char str[100] = {0};
+	
+	fgets(str, 100, stdin);
 
 	if (isPalindrome(str))
 	{
