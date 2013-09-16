@@ -8,17 +8,6 @@ Partitions
 #include <iostream>
 using namespace std;
 
-void cleanNextNums(int *a, const int n, const int beg)
-{
-	for (int i = beg; i < n; i++)
-	{
-		if (a[i] == 0)
-			return;
-
-		a[i] = 0;
-	}
-}
-
 void printPartitions(int *a, const int n)
 {
 	for (int i = 0; i < n; i++)
