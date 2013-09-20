@@ -16,12 +16,12 @@ int isPalindrome(char *str)
 
 	while (l < r)
 	{
-		while (!isalpha(str[l]) && !isdigit(str[l]))
+		while (l < r && !isalpha(str[l]) && !isdigit(str[l]))
 		{
 			l++;
 		}
 
-		while (!isalpha(str[r]) && !isdigit(str[r]))
+		while (l < r && !isalpha(str[r]) && !isdigit(str[r]) && r >= 0)
 		{
 			r--;
 		}
@@ -49,10 +49,10 @@ int main()
 
 	if (isPalindrome(str))
 	{
-		printf("Yes.\n");
+		printf("String is palindrome.\n");
 	}
 	else
 	{
-		printf("No.\n");
+		printf("String is not palindrome.\n");
 	}
 }

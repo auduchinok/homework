@@ -14,7 +14,9 @@ double powRec(int a, int n)
 		return 1;
 	}
 
-	double binPow = powRec(a, n / 2) * powRec(a, n / 2);
+	double powRecRem = powRec(a, n / 2);
+
+	double binPow = powRecRem * powRecRem;
 
 	if (n % 2 == 0)
 	{
