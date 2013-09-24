@@ -23,10 +23,7 @@ int main()
 
 	for (int i = 0; i <= 27; i++)
 	{
-		if (sum[i] == 1)
-			answer++;
-		else
-			answer += sum[i] * (sum[i] - 1);
+		answer += sum[i] * sum[i];
 	}
 
 	cout << answer << endl;

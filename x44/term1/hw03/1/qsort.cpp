@@ -7,12 +7,12 @@ QuickSort
 #include "qsort.h"
 #include <iostream>
 
-void qsortRecursive(int *a, int n, int low, int high)
+void qsortRecursive(char *a, int n, int low, int high)
 {
 	int l = low;
 	int r = high;
 
-	int m = a[l + (r - l) / 2];
+	char m = a[l + (r - l) / 2];
 
 	while (l <= r)
 	{
@@ -45,7 +45,7 @@ void qsortRecursive(int *a, int n, int low, int high)
 	}
 }
 
-void qsort(int *a, int n)
+void qsort(char *a, int n)
 {
     qsortRecursive(a, n, 0, n - 1);
 }
