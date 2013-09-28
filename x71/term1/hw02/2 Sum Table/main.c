@@ -39,7 +39,7 @@ int main ()
 	}
 
 	FILE *out;
-	out = fopen("sum.txt", "w");
+	out = freopen("sum.txt", "w", stdout);
 
 	if (out == NULL)
 	{
@@ -51,7 +51,7 @@ int main ()
 		printf("+-------");
 	}
 
-	printf("+\n");
+	fputs("+\n", out);
 
 	for (i = 0; i < n; i++)
 	{
@@ -69,4 +69,7 @@ int main ()
 
 		printf("+\n");
 	}
+
+	free(table);
+	free(data);
 }
