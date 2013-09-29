@@ -44,6 +44,11 @@ void printUpperLine(int *a, const int n)
 
 	for (int i = 1; i < n - 2; i++)
 	{	
+		if (a[i] == 0)
+		{
+			continue;
+		}
+
 		//sign & x
 		cout << "  ";
 
@@ -73,6 +78,11 @@ void printLowerLine(int *a, const int n)
 		return;
 	}
 
+	if (a[0] == -1)
+	{
+		cout << "-";
+	}
+
 	// First
 	if (abs(a[0]) != 1)
 	{
@@ -84,7 +94,10 @@ void printLowerLine(int *a, const int n)
 	// Pow
 	if (n > 2)
 	{
-		cout << " ";
+		for (int i = 0; i < numLength(n - i); i++)
+			{
+				cout << " ";
+			}
 	}
 
 	// Following digits
@@ -116,7 +129,10 @@ void printLowerLine(int *a, const int n)
 		// Pow
 		if (n - i > 2)
 		{
-			cout << " ";
+			for (int j = 0; j < numLength(n - i - 1); j++)
+			{
+				cout << " ";
+			}
 		}
 	}
 
@@ -126,7 +142,12 @@ void printLowerLine(int *a, const int n)
 		cout << "+";
 	}
 
-	cout << a[n - 1] << endl;
+	if (a[n - 1] != 0)
+	{
+		cout << a[n - 1];
+	}
+
+	cout << endl;
 }
 
 void printPolynomial(int *a, const int n)
@@ -141,6 +162,9 @@ void printPolynomial(int *a, const int n)
 
 int main()
 {
+
+	cout << numLength(5);
+
 	cout << "Polynomial" << endl;
 
 	int n = 0;
