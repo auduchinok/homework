@@ -40,7 +40,8 @@ void createTree(int *a, int j)
 
 void heapSort(int *a, int n)
 {
-	int i, j;
+	int i = 0;
+	int j = 0;
 
 	for (i = 1; i < n; i++)
 	{

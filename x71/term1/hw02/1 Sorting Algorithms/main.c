@@ -15,7 +15,7 @@ Sorting algorithms
 
 int copyArray(int *src, int *dest, int n)
 {
-	int i;
+	int i = 0;
 
 	for (i = 0; i < n; i++)
 	{
@@ -25,7 +25,7 @@ int copyArray(int *src, int *dest, int n)
 
 void printArray(int *a, int n)
 {
-	int i;
+	int i = 0;
 
 	for (i = 0; i < n; i++)
 	{
@@ -37,7 +37,7 @@ void printArray(int *a, int n)
 
 void mirrorArray(int *a, int n)
 {
-	int i;
+	int i = 0;
 
 	for (i = 0; i < n / 2; i++)
 	{
@@ -51,7 +51,8 @@ int main()
 
 	srand(time(NULL));
 
-	int i, arrayLength = 10;
+	int i = 0
+	int arrayLength = 10;
 
 	for (arrayLength = 10; arrayLength < 1000000; arrayLength *= 100)
 	{

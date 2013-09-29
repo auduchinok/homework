@@ -12,7 +12,9 @@ int main ()
 {
 	printf("Sum table\n");
 
-	int i, j, n;
+	int i = 0;
+	int j = 0;
+	int n = 0;
 
 	printf("Table size: ");
 	scanf("%d", &n);
