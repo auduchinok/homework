@@ -8,6 +8,7 @@ List Implementation
 #include <iostream>
 #include "list.h"
 using namespace std;
+using namespace list;
 
 void test1()
 {

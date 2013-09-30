@@ -1,7 +1,7 @@
 #include <iostream>
 #include "list.h"
 
-List *createList()
+list::List *list::createList()
 {
 	List *result = new List;
 	result->first = nullptr;
@@ -9,7 +9,7 @@ List *createList()
 	return result;
 }
 
-void deleteList(List *list)
+void list::deleteList(List *list)
 {
 	ListElement *tmp = list->first;
 
@@ -23,25 +23,17 @@ void deleteList(List *list)
 	delete list;
 }
 
-bool isEmpty(List *list)
+bool list::isEmpty(List *list)
 {
 	return (list->first == nullptr);
 }
 
-void add(List *list, int value)
+void list::add(List *list, int value)
 {
 	ListElement *toAdd = new ListElement;
 	toAdd->value = value;
 
-	if (isEmpty(list))
-	{
-		list->first = toAdd;
-		toAdd->next = nullptr;
-
-		return;
-	}
-
-	if (value < list->first->value)
+	if (isEmpty(list) || value < list->first->value)
 	{
 		toAdd->next = list->first;
 		list->first = toAdd;
@@ -60,7 +52,7 @@ void add(List *list, int value)
 	tmp->next = toAdd;
 }
 
-void remove(List *list, int value)
+void list::remove(List *list, int value)
 {
 	if (list->first->value > value)
 	{
@@ -93,7 +85,7 @@ void remove(List *list, int value)
 	delete toDelete;
 }
 
-void printList(List *list)
+void list::printList(List *list)
 {
 	if (isEmpty(list))
 	{
@@ -112,7 +104,7 @@ void printList(List *list)
 	std::cout << std::endl;
 }
 
-int get(List *list, int index)
+int list::get(List *list, int index)
 {
 	ListElement *tmp = list->first;
 
