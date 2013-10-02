@@ -51,7 +51,7 @@ int main()
 
 	srand(time(NULL));
 
-	int i = 0
+	int i = 0;
 	int arrayLength = 10;
 
 	for (arrayLength = 10; arrayLength < 1000000; arrayLength *= 100)
