@@ -1,2 +1,2 @@
 all:
-	gcc -wall main.c
+	gcc -Wall main.c -o sum

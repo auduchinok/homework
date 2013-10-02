@@ -8,44 +8,17 @@ Sum Table
 #include <stdio.h>
 #include <stdlib.h>
 
-int main ()
+void printTable(int **table, int n)
 {
-	printf("Sum table\n");
-
 	int i = 0;
 	int j = 0;
-	int n = 0;
-
-	printf("Table size: ");
-	scanf("%d", &n);
-
-	int *data = (int *) malloc(sizeof(int) * n * n);
-	int **table = (int **) malloc(sizeof(int) * n);
-	for (i = 0; i < n; i++)
-	{
-		table[i] = &data[i * n];
-	}
-
-	for (i = 0; i < n; i++)
-	{
-		table[i][0] = 1;
-		table[0][i] = 1;
-	}
-
-	for (i = 1; i < n; i++)
-	{
-		for (j = 1; j < n; j++)
-		{
-			table[i][j] = table[i - 1][j] + table[i][j - 1];
-		}
-	}
 
 	FILE *out;
 	out = freopen("sum.txt", "w", stdout);
 
 	if (out == NULL)
 	{
-		return 1;
+		return;
 	}
 
 	for (j = 0; j < n; j++)
@@ -71,6 +44,51 @@ int main ()
 
 		printf("+\n");
 	}
+
+}
+
+int **createTable(int **table, int n)
+{
+	int i = 0;
+	int j = 0;	
+
+	for (i = 0; i < n; i++)
+	{
+		table[i][0] = 1;
+		table[0][i] = 1;
+	}
+
+	for (i = 1; i < n; i++)
+	{
+		for (j = 1; j < n; j++)
+		{
+			table[i][j] = table[i - 1][j] + table[i][j - 1];
+		}
+	}
+
+	return table;
+}
+
+int main()
+{
+	printf("Sum table\n");
+
+	int i = 0;
+	int n = 0;
+
+	printf("Table size: ");
+	scanf("%d", &n);
+
+	int *data = (int *) malloc(sizeof(int) * n * n);
+	int **table = (int **) malloc(sizeof(int) * n);
+	for (i = 0; i < n; i++)
+	{
+		table[i] = &data[i * n];
+	}
+
+	createTable(table, n);
+
+	printTable(table, n);
 
 	free(table);
 	free(data);
