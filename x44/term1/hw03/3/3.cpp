@@ -69,4 +69,6 @@ int main()
 	}
 
 	cout << digits << endl;
+
+	delete[] digits;
 }
