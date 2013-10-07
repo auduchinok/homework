@@ -8,7 +8,7 @@ int main()
 
 	char buffer[128] = {0};
 
-	cout << "string :";
+	cout << "string: ";
 	cin >> buffer;
 
 	if (isCorrect(buffer))

@@ -29,6 +29,12 @@ bool isCorrect(char *buffer)
 		}
 		else
 		{
+			if (isEmpty(brStack))
+			{
+				deleteStack(brStack);
+				return false;
+			}
+
 			if ((ch == ')' && top(brStack) == '(') || (ch == ']' && top(brStack) == '[') || (ch == '}' && top(brStack) == '{'))
 			{
 				pop(brStack);
