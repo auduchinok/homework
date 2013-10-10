@@ -8,14 +8,17 @@ Head
 #include <stdio.h>
 #include <ctype.h>
 #include <stdlib.h>
+#include <string.h>
 #include "parser.h"
 
 enum Mode
 {	
-	none,
-	lines,
-	bytes
+	NONE,
+	LINES,
+	BYTES
 };
+
+typedef enum Mode Mode;
 
 void readLines(FILE *in, int count)
 {
@@ -24,13 +27,12 @@ void readLines(FILE *in, int count)
 	while (linesCount < count)
 	{
 		char c = fgetc(in);
-
-		if (c == EOF)
-		{
-			printf("\n");
-			break;
-		}
 		
+		if (feof(in))
+		{
+			return;
+		}
+
 		if (c == '\n')
 		{
 			linesCount++;
@@ -46,28 +48,26 @@ void readBytes(FILE *in, int count)
 
 	for (i = 0; i < count; i++)
 	{
-		char c = fgetc(in);
-
-		if (c == EOF)
+		if (feof(in))
 		{
-			printf("\n");
-			break;
+			return;
 		}
+
+		char c = fgetc(in);
 
 		fputc(c, stdout);
 	}
 }
 
-void readFiles(int argc, char **argv, int curArg, enum Mode mode, int count)
+void readFiles(int argc, char **argv, int curArg, Mode mode, int count)
+// mode: LINES/BYTES, count: number to read
 {
 	int i = 0;
 	int filesToRead = argc - curArg;
 
-	printf("files: %d\n", filesToRead);
-
 	if (filesToRead == 0)
 	{
-		if (mode == lines)
+		if (mode == LINES)
 		{
 			readLines(stdin, count);
 		}
@@ -96,7 +96,7 @@ void readFiles(int argc, char **argv, int curArg, enum Mode mode, int count)
 			printf("==> %s <==\n", filename);
 		}
 
-		if (mode == lines)
+		if (mode == LINES)
 		{
 			readLines(in, count);
 		}
@@ -129,7 +129,7 @@ void parseNum(char *num, int *count)
 
 void parseArguments(int argc, char **argv)
 {
-	enum Mode mode = none;
+	Mode mode = NONE;
 	int curArg = 1;
 	int count = 10;
 	int haveReadFile = 0;
@@ -140,9 +140,9 @@ void parseArguments(int argc, char **argv)
 
 		if (arg[0] != '-')
 		{
-			if (mode == none)
+			if (mode == NONE)
 			{
-				mode = lines;
+				mode = LINES;
 			}
 
 			readFiles(argc, argv, curArg, mode, count);
@@ -157,26 +157,26 @@ void parseArguments(int argc, char **argv)
 				return;
 			}
 			
-			if (mode == bytes)
+			if (mode == BYTES)
 			{
 				printf("head: can't combine line and byte counts\n");
 				return;
 			}
 
-			mode = lines;
+			mode = LINES;
 			curArg++;
 		}
 		else
 		{
-			if ((arg[1] == 'n') || (arg[1] == 'c'))
+			if (!strcmp(&arg[1], "n") || !strcmp(&arg[1], "c"))
 			{
-				if ((arg[1] == 'n' && mode == bytes) || (arg[1] == 'c' && mode == lines))
+				if ((arg[1] == 'n' && mode == BYTES) || (arg[1] == 'c' && mode == LINES))
 				{
 					printf("head: can't combine line and byte counts\n");
 					return;
 				}
 
-				mode = (arg[1] == 'n') ? lines : bytes;
+				mode = (arg[1] == 'n') ? LINES : BYTES;
 				curArg++;
 
 				arg = argv[curArg];
@@ -206,9 +206,9 @@ void parseArguments(int argc, char **argv)
 
 	if (!haveReadFile)
 	{	
-		if (mode == none)
+		if (mode == NONE)
 		{
-			mode = lines;
+			mode = LINES;
 		}
 
 		readFiles(argc, argv, curArg, mode, count);
