@@ -87,6 +87,7 @@ void readFiles(int argc, char **argv, int curArg, enum Mode mode, int count)
 		if (in == NULL)
 		{
 			printf("head: %s: No such file or directory\n", filename);
+			curArg++;
 			continue;
 		}
 
