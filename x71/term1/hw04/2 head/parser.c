@@ -26,7 +26,7 @@ void readLines(FILE *in, int count)
 
 	while (linesCount < count)
 	{
-		char c = fgetc(in);
+		int c = fgetc(in);
 		
 		if (feof(in))
 		{
@@ -53,14 +53,14 @@ void readBytes(FILE *in, int count)
 			return;
 		}
 
-		char c = fgetc(in);
+		int c = fgetc(in);
 
 		fputc(c, stdout);
 	}
 }
 
-void readFiles(int argc, char **argv, int curArg, Mode mode, int count)
 // mode: LINES/BYTES, count: number to read
+void readFiles(int argc, char **argv, int curArg, Mode mode, int count)
 {
 	int i = 0;
 	int filesToRead = argc - curArg;
