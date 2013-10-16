@@ -43,6 +43,14 @@ char *RemoveRepeats(char *word)
 	return result;
 }
 
+void printWord(char *word, int wordLength)
+{
+	word[wordLength] = 0;
+	word = RemoveRepeats(word);
+	cout << word;
+	delete[] word;
+}
+
 void readFile(ifstream &in)
 {
 	char *word = nullptr;
@@ -52,6 +60,11 @@ void readFile(ifstream &in)
 	while (!in.eof())
 	{
 		char c = in.get();
+
+		if (in.eof())
+		{
+			break;
+		}
 		
 		if (isalpha(c))
 		{
@@ -74,10 +87,7 @@ void readFile(ifstream &in)
 
 		if (ReadingAWord)
 		{	
-			word[wordLength] = 0;
-			word = RemoveRepeats(word);
-			cout << word;
-			delete[] word;
+			printWord(word, wordLength);
 
 			ReadingAWord = false;
 
@@ -88,6 +98,13 @@ void readFile(ifstream &in)
 			cout << c;
 		}
 	}
+
+	if (ReadingAWord)
+	{
+		printWord(word, wordLength);
+	}
+
+	cout << endl;
 }
 
 int main(int argc, char **argv)
