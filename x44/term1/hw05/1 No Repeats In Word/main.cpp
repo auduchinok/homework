@@ -8,111 +8,89 @@ No Repeats
 #include <iostream>
 #include <fstream>
 #include <cctype>
-#include <cstring>
 using namespace std;
 
-char *RemoveRepeats(char *word)
-{
-	int wordLength = strlen(word);
-	char *result = new char[256];
-	int resultLenth = 0;
+char *removeNulls(char *src, int length)
+{	
+	char *result = new char[length];
+	int resLength = 0;
 
-	for (int i = 0; i < wordLength; i++)
+	for (int i = 0; i < length; i++)
 	{
-		if (word[i] == 0)
+		if (src[i] != 0)
 		{
-			continue;
-		}
-
-		result[resultLenth] = word[i];
-		resultLenth++;
-
-		for (int j = i + 1; j < wordLength; j++)
-		{
-			if (tolower(word[j]) == tolower(word[i]))
-			{
-				word[j] = 0;
-			}
+			result[resLength] = src[i];
+			resLength++;
 		}
 	}
-
-	result[resultLenth] = 0;
-
-	delete[] word;
-
+	result[resLength] = 0;
+	
+	delete[] src;
 	return result;
 }
 
-void printWord(char *word, int wordLength)
+char *removeRepeats(char *src, int length)
 {
-	word[wordLength] = 0;
-	word = RemoveRepeats(word);
-	cout << word;
-	delete[] word;
-}
-
-void readFile(ifstream &in)
-{
-	char *word = nullptr;
-	int wordLength = 0;
-	bool ReadingAWord = false;
-
-	while (!in.eof())
+	for (int i = 0; i < length; i++)
 	{
-		char c = in.get();
-
-		if (in.eof())
+		if (!isalpha(src[i]))
 		{
-			break;
-		}
-		
-		if (isalpha(c))
-		{
-			if (ReadingAWord)
-			{
-				word[wordLength] = c;
-				wordLength++;
-			}
-			else
-			{
-				word = new char[256];
-				word[0] = c;
-				wordLength = 1;
-
-				ReadingAWord = true;
-			}
-
 			continue;
 		}
-
-		if (ReadingAWord)
-		{	
-			printWord(word, wordLength);
-
-			ReadingAWord = false;
-
-			cout << c;
-		}
-		else
+		
+		for (int j = i + 1; !isspace(src[j]); j++)
 		{
-			cout << c;
+			if (tolower(src[i]) == tolower(src[j]))
+			{
+				src[j] = 0;
+			}
 		}
 	}
 
-	if (ReadingAWord)
-	{
-		printWord(word, wordLength);
-	}
+	return removeNulls(src, length);
+}
 
-	cout << endl;
+void printFile(ifstream &in)
+{
+	in.seekg(0, in.end);
+	int fileLength = in.tellg();
+	char *buffer = new char[fileLength];
+	in.seekg(0, in.beg);
+
+	in.read(buffer, fileLength);
+	
+	char *text = removeRepeats(buffer, fileLength);
+
+	cout << text << endl;
+
+	delete[] text;
 }
 
 int main(int argc, char **argv)
 {
-	// Удобно тестить на main.cpp :)
-	ifstream in(argv[1]);
+	if (argc < 2)
+	{
+		cout << "No files to open." << endl;
+		return 0;
+	}
 
-	readFile(in);
+	bool showFileNames = argc - 1 > 1;
 
-	in.close();
+	for (int i = 1; i < argc; i++)
+	{
+		ifstream in(argv[i]);
+		if (!in)
+		{
+			cout << "No such file: " << argv[i] << endl;
+			continue;
+		}
+
+		if (showFileNames)
+		{
+			cout << "==> " << argv[i] << " <==" << endl;
+		}
+		
+		printFile(in);
+		in.close();
+	}
 }
