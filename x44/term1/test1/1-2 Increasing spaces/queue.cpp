@@ -31,6 +31,8 @@ void queue::deleteQueue(Queue *queue)
 		delete[] toDelete->string;
 		delete toDelete;
 	}
+
+	delete queue;
 }
 
 void queue::push(Queue *queue, char *string)
