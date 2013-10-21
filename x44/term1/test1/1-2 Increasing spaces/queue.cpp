@@ -65,6 +65,7 @@ void queue::pop(Queue *queue)
 	}
 
 	QueueElement *toDelete = queue->front;
+	delete[] toDelete->string;
 	queue->front = toDelete->next;
 
 	delete toDelete;
