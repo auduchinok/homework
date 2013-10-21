@@ -62,6 +62,7 @@ double calc(char *exprStr)
 
 	double result = top(s);
 	pop(s);
+	delete[] exprStr;
 	delete s;
 
 	return result;

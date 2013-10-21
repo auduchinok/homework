@@ -18,5 +18,4 @@ int main()
 	cin.getline(s, 100);
 
 	cout << calc(s) << endl;
-	delete[] s;
 }

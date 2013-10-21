@@ -54,7 +54,7 @@ char *createPostfix(char *src)
 	int resultLength = 0;
 
 	bool readingNum = false;
-	char *num = new char[10];
+	char num[10];
 	int numLength = 0;
 
 	Stack *s = createStack();
@@ -131,6 +131,7 @@ char *createPostfix(char *src)
 
 	result[resultLength - 1] = 0;
 	delete[] src;
+	delete s;
 
 	return result;
 }
