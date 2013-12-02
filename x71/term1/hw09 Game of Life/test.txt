@@ -1,0 +1,5 @@
+25 25
+Beehive 5 5
+Block 9 7
+Blinker 22 20
+Beacon 12 15
