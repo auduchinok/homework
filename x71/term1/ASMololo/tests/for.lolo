@@ -1,0 +1,6 @@
+		mov r0, 10
+lab:	sub r0, 1
+		mov r1, 0
+		cmp r1, r0
+		jne r0, lab
+		hlt r0

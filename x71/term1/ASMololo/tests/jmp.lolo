@@ -1,0 +1,4 @@
+mov r0 1
+jmp 2q
+add r0 2
+2q: hlt r0
