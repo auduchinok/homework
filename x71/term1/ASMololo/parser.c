@@ -165,7 +165,7 @@ Instruction *parse(char *filename)
 					}
 
 					if ((op1.type == OT_MEM || op1.type == OT_PTR) && 
-						(op2.type == OT_MEM || op2.type == OT_PTR)
+						(op2.type == OT_MEM || op2.type == OT_PTR))
 					{
 						printf("asmo: at line %d: both operands can't access memory.\n", count + 1);
 						exit(2);
