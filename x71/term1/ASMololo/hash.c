@@ -103,12 +103,13 @@ void enlarge_table(Hash_Table *t)
 
 int hashf(char *value, int size)
 {
+	int i = 0;
 	int result = 0;
 	int str_length = strlen(value);
 
 	const int BASE = 107;
 	int base_pow = 1;
-	for (int i = 0; i < str_length; i++)
+	for (i = 0; i < str_length; i++)
 	{
 		base_pow = (base_pow * BASE) % size;
 		result = (result + value[i] * base_pow) % size;
