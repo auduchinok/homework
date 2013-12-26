@@ -118,10 +118,11 @@ Instruction *parse(char *filename)
 		}
 
 		program[count].type = get_instr_type(instr);
+		Instr_Type i_type = program[count].type;
 
 		char *op = strtok(NULL, " \t\n");
 		
-		if (program[count].type == IT_JMP)
+		if (i_type == IT_JMP)
 		{
 			program[count].op[0] = get_label_operand(op);
 			program[count].op[1].type = OT_NONE;
@@ -129,6 +130,12 @@ Instruction *parse(char *filename)
 		else
 		{
 			program[count].op[0] = get_math_operand(op);
+
+			if (i_type == IT_MOV && program[count].op[0].type == OT_CONST)
+			{
+				printf("asmo: at line %d: operand1 mustn't be a constant\n", count);
+				exit(2);
+			}
 
 			if (program[count].type == IT_HLT)
 			{
@@ -145,6 +152,25 @@ Instruction *parse(char *filename)
 			else
 			{
 				program[count].op[1] = get_math_operand(op);
+
+				if (i_type == IT_MOV)
+				{
+					Operand op1 = program[count].op[0];
+					Operand op2 = program[count].op[1];
+
+					if (op1.type != OT_REG)
+					{
+						printf("asmo: at line %d: op1 should a register\n", count + 1);
+						exit(2);
+					}
+
+					if ((op1.type == OT_MEM || op1.type == OT_PTR) && 
+						(op2.type == OT_MEM || op2.type == OT_PTR)
+					{
+						printf("asmo: at line %d: both operands can't access memory.\n", count + 1);
+						exit(2);
+					}
+				}
 			}
 		}
 
