@@ -1,0 +1,35 @@
+Terminals:
+	Start, Assign, Expr, Term, Factor, Prime, Func, Arg, Sign
+Non-Terminals:
+	id, num, +, -, /, *, funcname, (, ), ;, ^, eps
+
+Start -> Assign Expr ;
+
+Assign -> id =
+Assign -> id = Assign
+
+Expr -> Term
+Expr -> Term + Expr
+Expr -> Term - Expr
+
+Term -> Factor
+Term -> Factor * Term
+Term -> Factor / Term
+
+Factor -> Sign ^ Factor
+Factor -> Sign
+
+Sign -> Prime
+Sign -> -Prime
+
+Prime -> (Expr)
+Prime -> num
+Prime -> Func
+
+Func -> funcname ( Args )
+
+Args -> eps
+Args -> Arg
+
+Arg -> Expr
+Arg -> Expr , Arg
