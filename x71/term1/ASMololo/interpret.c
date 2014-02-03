@@ -94,6 +94,10 @@ void math(Instr_Type i_type, Operand reg, Operand op)
 			r[dest] = value1 % value2;
 			break;
 		}
+		default:
+		{
+			/* do nothing */
+		}
 	}
 }
 
