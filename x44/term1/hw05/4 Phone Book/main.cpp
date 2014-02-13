@@ -13,8 +13,8 @@ int main()
 	Database db;
 
 	int mode = -1;
-	char name[db.nameLength] = {'\0'};
-	char number[db.nameLength] = {'\0'};
+	char name[Database::nameLength] = {'\0'};
+	char number[Database::nameLength] = {'\0'};
 	char *result = nullptr;
 
 	while (mode != 0)
@@ -35,10 +35,10 @@ int main()
 			case 1:
 			{
 				std::cout << "name: ";
-				std::cin.getline(name, db.nameLength);
+				std::cin.getline(name, Database::nameLength);
 
 				std::cout << "number: ";
-				std::cin.getline(number, db.nameLength);
+				std::cin.getline(number, Database::nameLength);
 
 				db.addRecord(name, number);
 
@@ -47,7 +47,7 @@ int main()
 			case 2:
 			{
 				std::cout << "name: ";
-				std::cin.getline(name, db.nameLength);
+				std::cin.getline(name, Database::nameLength);
 
 				result = db.findByName(name);
 
@@ -67,7 +67,7 @@ int main()
 			case 3:
 			{
 				std::cout << "number: ";
-				std::cin.getline(number, db.nameLength);
+				std::cin.getline(number, Database::nameLength);
 
 				result = db.findByNumber(number);
 
