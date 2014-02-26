@@ -5,9 +5,11 @@ CONFIG -= qt
 CONFIG += c++11
 
 SOURCES += main.cpp \
-    pointerlist.cpp
+    pointerlist.cpp \
+    arraylist.cpp
 
 HEADERS += \
     list.h \
-    pointerlist.h
+    pointerlist.h \
+    arraylist.h
 

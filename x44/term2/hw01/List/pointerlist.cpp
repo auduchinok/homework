@@ -1,16 +1,15 @@
 #include <iostream>
 #include "pointerlist.h"
 
-PointerList::PointerList()
+PointerList::PointerList() : head(nullptr)
 {
-    head = nullptr;
 }
 
 PointerList::~PointerList()
 {
     ListElement *tmp = head;
 
-    while (head != nullptr)
+    while (tmp != nullptr)
     {
         ListElement *toDel = tmp;
 
