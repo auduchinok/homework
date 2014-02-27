@@ -2,7 +2,6 @@
 #include <cstdlib>
 #include "bogosort.h"
 #include "quicksort.h"
-using namespace std;
 
 void print(int *a, int n)
 {
