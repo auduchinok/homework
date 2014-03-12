@@ -1,4 +1,7 @@
-﻿// List elements sum
+﻿// Eugene Auduchinok (c) 2014
+// HW 171-2.01
+
+// List elements sum
 let rec listSum l = 
     match l with
     | [] -> 0
