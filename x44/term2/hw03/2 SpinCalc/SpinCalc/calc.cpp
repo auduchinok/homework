@@ -19,33 +19,35 @@ Calc::~Calc()
 
 void Calc::calc()
 {
+    enum Operation {add, sub, mul, div};
+
     int val1 = ui->spinBox->value();
     int val2 = ui->spinBox_2->value();
-    int op = ui->comboBox->currentIndex();
+    Operation op = static_cast<Operation> (ui->comboBox->currentIndex());
 
-    int result = 0;
+    double result = 0;
 
     switch (op)
     {
-        case 0:
+        case add:
         {
             result = val1 + val2;
 
             break;
         }
-        case 1:
+        case sub:
         {
             result = val1 - val2;
 
             break;
         }
-        case 2:
+        case mul:
         {
             result = val1 * val2;
 
             break;
         }
-        case 3:
+        case div:
         {
             if (val2 == 0)
             {
@@ -53,7 +55,7 @@ void Calc::calc()
                 return;
             }
 
-            result = val1 / val2;
+            result = val1 / static_cast<double> (val2);
         }
     }
 
