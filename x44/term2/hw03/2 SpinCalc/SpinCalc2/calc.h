@@ -10,3 +10,7 @@ class Calc : public QObject
 public slots:
     double calc(Operation op, int a, int b);
 };
+
+class DivideByZeroException
+{
+};

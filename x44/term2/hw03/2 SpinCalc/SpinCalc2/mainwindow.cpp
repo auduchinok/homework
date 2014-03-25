@@ -23,6 +23,13 @@ void MainWindow::calcIt()
     int value2 = ui->spinBox_2->value();
     Operation op = static_cast<Operation> (ui->comboBox->currentIndex());
 
-    double result = calc.calc(op, value1, value2);
-    ui->lineEdit->setText(QString::number(result));
+    try
+    {
+        double result = calc.calc(op, value1, value2);
+        ui->lineEdit->setText(QString::number(result));
+    }
+    catch (DivideByZeroException)
+    {
+        ui->lineEdit->setText("Division by zero");
+    }
 }

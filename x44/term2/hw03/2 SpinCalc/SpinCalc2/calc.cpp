@@ -18,14 +18,12 @@ double Calc::calc(Operation op, int a, int b)
     }
     case division:
     {
-        try
+        if (b == 0)
         {
-            return a / static_cast<double> (b);
+            throw DivideByZeroException();
         }
-        catch (...)
-        {
-            throw;
-        }
+
+        return a / static_cast<double> (b);
     }
     }
 }
