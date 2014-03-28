@@ -8,4 +8,4 @@ let sumWays size =
 
     fact (size * 2) / (fact size) ** 2
 
-printfn "%A" (sumWays 20)S
+printfn "%A" (sumWays 20)
