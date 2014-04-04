@@ -7,24 +7,15 @@ template <typename T>
 class MatrixSorter
 {
 public:
-    MatrixSorter() : a(nullptr) {}
+    MatrixSorter() {}
 
     void sort(T **matrix, int length, int height)
     {
-        a = matrix;
-        matrixHeight = height;
-
-        qsort(0, length - 1);
-
-        a = nullptr;
-        matrixHeight= 0;
+        qsort(matrix, 0, length - 1, height);
     }
 
 private:
-    T **a;  // matrix array
-    int matrixHeight;
-
-    void qsort(int low, int high)
+    void qsort(T **a, int low, int high, int height)
     {
         int l = low;
         int r = high;
@@ -45,7 +36,7 @@ private:
 
             if (l <= r)
             {
-                swapColumns(l, r);
+                swapColumns(a, l, r, height);
 
                 l++;
                 r--;
@@ -54,19 +45,19 @@ private:
 
         if (r > low)
         {
-            qsort(low, r);
+            qsort(a, low, r, height);
         }
 
         if (l < high)
         {
-            qsort(l, high);
+            qsort(a, l, high, height);
         }
 
     }
 
-    void swapColumns(int columnA, int columnB)
+    void swapColumns(int **a, int columnA, int columnB, int height)
     {
-        for (int i = 0; i < matrixHeight; i++)
+        for (int i = 0; i < height; i++)
         {
             T tmp = a[i][columnA];
             a[i][columnA] = a[i][columnB];
