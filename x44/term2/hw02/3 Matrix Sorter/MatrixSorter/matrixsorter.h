@@ -3,8 +3,6 @@
 
 #pragma once
 
-#include <utility>
-
 template <typename T>
 class MatrixSorter
 {
@@ -70,7 +68,9 @@ private:
     {
         for (int i = 0; i < matrixHeight; i++)
         {
-            std::swap(a[i][columnA], a[i][columnB]);
+            T tmp = a[i][columnA];
+            a[i][columnA] = a[i][columnB];
+            a[i][columnB] = tmp;
         }
     }
 };
