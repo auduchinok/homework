@@ -44,4 +44,11 @@ int main()
     sorter.sort(a, 3, 3);
 
     print(a, 3, 3);
+
+    for (int i = 0; i < 3; i++)
+    {
+        delete[] a[i];
+    }
+
+    delete[] a;
 }
