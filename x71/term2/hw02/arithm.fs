@@ -24,15 +24,15 @@ let rec simplify expr =
         | _ -> expr
 
     match expr with
-    | Add (e1, e2) -> simplify' (Add (e1, e2))
-    | Sub (e1, e2) -> simplify' (Sub (e1, e2))
-    | Mul (e1, e2) -> simplify' (Mul (e1, e2))
-    | Div (e1, e2) -> simplify' (Div (e1, e2))
+    | Add (e1, e2) -> simplify' (Add (simplify e1, simplify e2))
+    | Sub (e1, e2) -> simplify' (Sub (simplify e1, simplify e2))
+    | Mul (e1, e2) -> simplify' (Mul (simplify e1, simplify e2))
+    | Div (e1, e2) -> simplify' (Div (simplify e1, simplify e2))
     | _ -> expr
     
 
-printfn "%A" (simplify (Add (Const 5, Const 3)))
-printfn "%A" (simplify (Sub (Var "x", Const 0)))
-printfn "%A" (simplify (Mul (Var "x", Const 0)))
-printfn "%A" (simplify (Mul (Const 1, (Sub (Var "x", Var "x")))))
-printfn "%A" (simplify (Add (Var "x", Var "y")))
+//printfn "%A" (simplify (Sub (Var "x", Const 0)))
+printfn "%A" (simplify (Add (Const 3, Sub (Const 5, Const 2))))
+//printfn "%A" (simplify (Mul (Var "x", Const 0)))
+//printfn "%A" (simplify (Mul (Const 1, (Sub (Var "x", Var "x")))))
+//printfn "%A" (simplify (Add (Var "x", Var "y")))
