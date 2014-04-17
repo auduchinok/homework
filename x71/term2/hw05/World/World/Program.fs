@@ -9,7 +9,7 @@ type Pizza() =
 type Alive() = 
     let mutable dead = false
     abstract member Eat : unit -> unit
-    member this.Dead with get() = dead and set(b) = dead <- b
+    member this.Dead = dead
     member this.Die () = dead <- true
     
 
