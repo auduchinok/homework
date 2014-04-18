@@ -1,6 +1,4 @@
-﻿//module Huffman
-
-type CodeTree = 
+﻿type CodeTree = 
   | Fork of left: CodeTree * right: CodeTree * chars: char list * weight: int
   | Leaf of char: char * weight: int
 
@@ -15,10 +13,6 @@ let chars (t: CodeTree) =
     match t with
     | Fork(_, _, x, _) -> x
     | Leaf(x, _) -> [x]
-  
-    
-let makeCodeTree left right =
-    Fork(left, right, chars left @ chars right, weight left + weight right)
 
 
 let stringToChars (str: string) =
@@ -62,22 +56,26 @@ let rec orderedLeafList (list: (char * int) list) =
         addToSortedList (Leaf(ch, weight)) (orderedLeafList tail)
 
 
-printfn "%A" ("zzqwewzertztszdszf" |> stringToChars |> times |> orderedLeafList)
+let singletone (t: CodeTree list) =
+    List.length t = 1
 
 
-//
-//let createCodeTree (chars: char list) : CodeTree = 
-//    failwith "Not implemented"
-//
-//// decode
-//
-//type Bit = int
-//
-//let decode (tree: CodeTree)  (bits: Bit list) : char list = 
-//  failwith "Not implemented"
-//
-//// encode
-//
-//let encode (tree: CodeTree)  (text: char list) : Bit list = 
-//  failwith "Not implemented"
+let combine (left: CodeTree) (right: CodeTree) =
+    Fork(left, right, chars left @ chars right, weight left + weight right)
 
+
+let createCodeTree (chars: char list) = 
+    let rec createFromLeafList (list: CodeTree list) =
+        match list with
+        | [] -> None
+        | hd :: [] -> Some hd
+        | first :: second :: tail ->
+            createFromLeafList (addToSortedList (combine first second) tail)
+        
+    let singletonList = (chars |> times  |>  orderedLeafList |> createFromLeafList)
+
+    match singletonList with
+    | None -> failwith "Should't be empty."
+    | Some el -> el
+
+printfn "%A" ("zzqwewzertztszdszf" |> stringToChars |> createCodeTree)
