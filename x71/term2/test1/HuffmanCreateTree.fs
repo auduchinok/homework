@@ -56,10 +56,6 @@ let rec orderedLeafList (list: (char * int) list) =
         addToSortedList (Leaf(ch, weight)) (orderedLeafList tail)
 
 
-let singletone (t: CodeTree list) =
-    List.length t = 1
-
-
 let combine (left: CodeTree) (right: CodeTree) =
     Fork(left, right, chars left @ chars right, weight left + weight right)
 
@@ -75,7 +71,7 @@ let createCodeTree (chars: char list) =
     let singletonList = (chars |> times  |>  orderedLeafList |> createFromLeafList)
 
     match singletonList with
-    | None -> failwith "Should't be empty."
+    | None -> failwith "Shouldn't be empty."
     | Some el -> el
 
-printfn "%A" ("zzqwewzertztszdszf" |> stringToChars |> createCodeTree)
+printfn "%A" ("aaabbcd" |> stringToChars |> createCodeTree)
