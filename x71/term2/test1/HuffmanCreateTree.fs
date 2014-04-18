@@ -1,4 +1,4 @@
-﻿module Huffman
+﻿//module Huffman
 
 type CodeTree = 
   | Fork of left: CodeTree * right: CodeTree * chars: char list * weight: int
@@ -14,7 +14,7 @@ let weight (t: CodeTree) =
 let chars (t: CodeTree) =
     match t with
     | Fork(_, _, x, _) -> x
-    | Leaf(x, _) -> x :: []
+    | Leaf(x, _) -> [x]
   
     
 let makeCodeTree left right =
@@ -41,28 +41,43 @@ let rec times (chars: char list) =
     | head :: tail -> addChar head (times tail)
 
 
-let orderedLeafList (list: (char * int) list) =
-    let rec orderedLeafList' (list: (char * int) list) = 
-        match list with
-        | [] -> []
-        | head :: tail ->
-            let ch, times = head
-            Leaf(ch, times) :: orderedLeafList' tail
+let rec addToSortedList (t: CodeTree) (list: (CodeTree list)) =
+    match list with
+    | [] -> [t]
+    | head :: tail ->
+        match t, head with
+        | Leaf(_, tWeight), Leaf(_, hdWeight) | Leaf(_, tWeight), Fork(_, _, _, hdWeight)
+        | Fork(_, _, _, tWeight), Leaf(_, hdWeight) | Fork(_, _, _, tWeight), Fork(_, _, _, hdWeight) ->
+            if tWeight < hdWeight then
+                t :: list
+            else
+                head :: addToSortedList t tail
 
-    List.sortBy(fun Leaf(ch, times) -> times) (orderedLeafList' list)
+
+let rec orderedLeafList (list: (char * int) list) =
+    match list with
+    | [] -> []
+    | head :: tail ->
+        let ch, weight = head
+        addToSortedList (Leaf(ch, weight)) (orderedLeafList tail)
 
 
-let createCodeTree (chars: char list) : CodeTree = 
-    failwith "Not implemented"
+printfn "%A" ("zzqwewzertztszdszf" |> stringToChars |> times |> orderedLeafList)
 
-// decode
 
-type Bit = int
+//
+//let createCodeTree (chars: char list) : CodeTree = 
+//    failwith "Not implemented"
+//
+//// decode
+//
+//type Bit = int
+//
+//let decode (tree: CodeTree)  (bits: Bit list) : char list = 
+//  failwith "Not implemented"
+//
+//// encode
+//
+//let encode (tree: CodeTree)  (text: char list) : Bit list = 
+//  failwith "Not implemented"
 
-let decode (tree: CodeTree)  (bits: Bit list) : char list = 
-  failwith "Not implemented"
-
-// encode
-
-let encode (tree: CodeTree)  (text: char list) : Bit list = 
-  failwith "Not implemented"
