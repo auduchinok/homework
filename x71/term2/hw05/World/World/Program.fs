@@ -1,4 +1,6 @@
-﻿let rnd = new System.Random()
+﻿// Eugene Auduchinok (2014)
+
+let rnd = new System.Random()
 
 type Pizza() =
     let tasty = rnd.Next(2) > 0
