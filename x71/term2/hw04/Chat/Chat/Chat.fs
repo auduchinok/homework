@@ -1,37 +1,42 @@
-﻿open System.Windows.Forms
-open System.Runtime.InteropServices
+﻿// Eugene Auduchinok, 2014
+
+namespace ChatBot
+
+open System.Windows.Forms
+open System.Drawing
 open AIMLbot
 
-[<DllImport("kernel32.dll")>] extern bool FreeConsole()
-FreeConsole() |> ignore
+module Bot =
+    let bot = new Bot()
+    bot.loadSettings()
+    bot.loadAIMLFromFiles()
+    let user = new User("User", bot)
 
-let bot = new Bot()
-bot.loadSettings()
-bot.loadAIMLFromFiles()
-let user = new User("User", bot)
+    let askBot message = 
+        bot.Chat(new Request(message, user, bot)).ToString()
 
-let form = new Form(Width = 400, Height = 400, Text = "ChatWithUnknown@localhost", MaximizeBox = false)
-let log = new RichTextBox(Dock = DockStyle.Fill, ReadOnly = true)
-let input = new TextBox(Dock = DockStyle.Bottom)
-let sendButton = new Button(Text = "Send", Dock = DockStyle.Bottom)
+    let createForm () = 
+        let form = new Form(Width = 400, Height = 400, Text = "Chat@localhost", MaximizeBox = false, Icon = new Icon("icon.ico"))
+        let log = new RichTextBox(Dock = DockStyle.Fill, ReadOnly = true, TabIndex = 2)
+        let input = new TextBox(Dock = DockStyle.Bottom, TabIndex = 0)
+        let sendButton = new Button(Text = "Send", Dock = DockStyle.Bottom, TabIndex = 1)
 
-let send message = 
-    log.Text <- "Bot: " + (bot.Chat(new Request(input.Text, user, bot))).ToString() + 
-                "\nYou: " + message + "\n" + log.Text
-    input.Text <- ""
-    input.Focus() |> ignore
+        let send message = 
+            if not (message.Equals("")) then
+                log.Text <- "Bot: " + askBot message + "\nYou: " + message + "\n" + log.Text
+                input.Text <- ""
+                input.Focus() |> ignore
 
-input.KeyDown.Add (fun e -> if e.KeyCode = Keys.Enter
-                                then send input.Text
-                            else () )
+        input.KeyDown.Add (fun e ->
+            if e.KeyCode = Keys.Enter
+            then send input.Text
+            else () )
 
-sendButton.Click.Add (fun _ -> send input.Text)
+        sendButton.Click.Add (fun _ -> send input.Text)
+        form.Closed.Add (fun _ -> Application.Exit())
 
-form.Closed.Add (fun _ -> Application.Exit())
-    
-form.Controls.AddRange([|log; input; sendButton|])
-form.Show()
+        form.Controls.AddRange([|log; input; sendButton|])
+        form.Show()
 
-input.Focus() |> ignore
-
-Application.Run()
+    createForm ()
+    Application.Run()
