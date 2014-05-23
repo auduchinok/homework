@@ -1,4 +1,4 @@
-﻿// Eugene Auduchinok (2014)
+﻿// Eugene Auduchinok, 2014
 
 let rnd = new System.Random()
 
