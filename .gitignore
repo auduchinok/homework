@@ -1,20 +1,49 @@
-*.suo
-*.user
-*.sln.docstates
-
-[Rr]elease/
-[Oo]bj/
-[Dd]ebug
-
-*.log
-Thumbs.db
-ehthumbs.db
+#OS junk files
+[Tt]humbs.db
+*.DS_Store
 Desktop.ini
 $RECYCLE.BIN/
-*.exe
-*.out
+
+# Visual Studio files
+*.[Oo]bj
+*.sln.docstates
+*.user
+*.aps
+*.pch
+*.vspscc
+*.vssscc
+*_i.c
+*_p.c
+*.ncb
+*.suo
+*.tlb
+*.tlh
+*.bak
+*.[Cc]ache
+*.ilk
+*.log
+*.lib
+*.sbr
+*.sdf
+*.opensdf
+*.unsuccessfulbuild
+ipch/
+[Oo]bj/
+[Bb]in
+[Dd]ebug*/
+[Rr]elease*/
+[Bb]uild/
+
+# NuGet
+packages/
+
+# Sublime Text
 *.sublime-project
 *.sublime-workspace
+
+#QT Creator
 *.pro.user
-.DS_Store
+
+# GCC
+*.out
 *.o
