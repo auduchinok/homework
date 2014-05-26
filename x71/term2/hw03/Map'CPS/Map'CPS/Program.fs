@@ -1,4 +1,6 @@
-﻿// Eugene Auduchinok, 2014
+﻿// Eugene Auduchinok (c) 2014
+
+module Map'CPS
 
 // 'a list -> ('a -> 'b) -> ('b list -> 'c) -> 'c
 let map'cps l f k =
