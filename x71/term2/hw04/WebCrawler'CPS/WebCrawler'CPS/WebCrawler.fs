@@ -29,8 +29,7 @@ let filterImages = function
 
 
 let crawl sites =
-    map (fun url callback -> getUrl url (getImages >> filterImages >> callback)) (printfn "%A") sites
-
+    map (fun url callback -> getUrl url (getImages >> filterImages >> callback)) (List.concat >> printfn "%A") sites
 
 let sites = ["http://sputnik.ru"; "https://google.com"]
 let images = crawl sites
