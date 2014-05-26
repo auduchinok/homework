@@ -24,7 +24,7 @@ let getImages (page : string) =
 
 
 let filterImages = function
-    | images when List.length images < 4 -> []
+    | images when List.length images < 5 -> []
     | images -> images |> Seq.distinct |> Seq.toList
 
 
