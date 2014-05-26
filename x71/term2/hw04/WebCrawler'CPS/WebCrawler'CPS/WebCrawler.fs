@@ -7,14 +7,14 @@ open WebR
 open Map'CPS
 
 let getImages (page : string) =
-    let (page : string) = page.ToLower ()
+    let comparison = StringComparison.InvariantCultureIgnoreCase
     let rec getImages' (index : int) =
-        let imageIndex = page.IndexOf("<img", index)
+        let imageIndex = page.IndexOf("<img", index, comparison)
         match imageIndex with
         | -1 -> []
         | foundIndex ->
             let srcString = "src=\""
-            let imagePathIndex = page.IndexOf(srcString , foundIndex) + srcString.Length
+            let imagePathIndex = page.IndexOf(srcString , foundIndex, comparison) + srcString.Length
             let pathEndIndex = page.IndexOf("\"", imagePathIndex)
             let pathLength = pathEndIndex - imagePathIndex
 
@@ -29,7 +29,7 @@ let filterImages = function
 
 
 let crawl sites =
-    map (fun url callback -> getUrl url (fun page -> page |> getImages |> filterImages |> callback) ) (printfn "%A") sites
+    map (fun url callback -> getUrl url (getImages >> filterImages >> callback)) (printfn "%A") sites
 
 
 let sites = ["http://sputnik.ru"; "https://google.com"]
