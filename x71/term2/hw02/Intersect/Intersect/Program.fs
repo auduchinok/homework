@@ -137,7 +137,8 @@ let rec intersect = function
                 | _ -> NoPoint
             | Line (_) ->
                 let sortedPoints = Array.sortBy fst [|(x1, y1); (x2, y2); (x3, y3); (x4, y4)|]
-                LineSegment ((sortedPoints.[1], sortedPoints.[2]))
+                if max x1 x2 < min x3 x4 then NoPoint
+                else LineSegment ((sortedPoints.[1], sortedPoints.[2]))
 
             | _ -> failwith "Wrong type"
 
