@@ -6,7 +6,7 @@ radd (a, b) (c, d) = rnorm (a * d + c * b, b * d)
 
 
 -- 2.2
-rsub (a, b) (c, d) = rnorm (a * d - c * b, b * d)
+rsub (a, b) (c, d) = radd (a, b) (-c, d)
 
 
 -- 2.3
@@ -18,7 +18,7 @@ rinv (a, b) = rnorm (b, a)
 
 
 -- 2.5
-rdiv (a, b) (c, d) = rnorm (a * d, b * c)
+rdiv (a, b) (c, d) = rmul (a, d) (b, c)
 
 
 -- 2.6
@@ -32,9 +32,8 @@ map' f (hd:tl) = f hd : map' f tl
 
 
 -- 2.8
-zip' [] _ = []
-zip' _ [] = []
-zip' (hd1:tl1) (hd2:tl2) = (hd1, hd2) : zip' tl1 tl2
+zip' (x:xs) (y:ys) = (x, y) : zip' xs ys
+zip' _ _ = []
 
 
 -- 2.9
