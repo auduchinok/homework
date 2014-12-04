@@ -59,7 +59,7 @@ let shouldDrunk (day : System.DayOfWeek) =
 
     customer.GoShopping allInclusiveShop
     customer.GetDrunk ()
-    (customer.IsDrunk && day = System.DayOfWeek.Friday) || day <> System.DayOfWeek.Friday
+    (customer.IsDrunk && day = System.DayOfWeek.Friday) || (not customer.IsDrunk && day <> System.DayOfWeek.Friday)
 
 [<Test>]
 let ``Should only get drunk on Friday`` () = 
