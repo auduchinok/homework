@@ -3,6 +3,7 @@
 open NUnit.Framework
 open FsUnit
 open Shop
+open NSubstitute
 
 type EmptyShop() = 
     interface IShop with
@@ -64,3 +65,32 @@ let shouldDrunk (day : System.DayOfWeek) =
 [<Test>]
 let ``Should only get drunk on Friday`` () = 
     FsCheck.Check.QuickThrowOnFailure shouldDrunk
+
+[<Test>]
+let ``CanSell is called prior to Sell`` ()=
+    let customer = new Customer.Customer(calendarFriday)
+    let shop = Substitute.For<IShop>()
+
+    customer.GoShopping shop
+
+    Received.InOrder(fun () -> 
+        shop.CanSell(Arg.Any()) |> ignore
+        shop.Sell |> ignore
+    )
+
+
+let testWithGoods (goods : Good list) =
+    let customer = new Customer.Customer(calendarFriday)
+    let shop = Substitute.For<IShop>()
+
+    if not goods.IsEmpty then
+        shop.CanSell(List.head goods).Returns(false) |> ignore
+        shop.Sell(goods).Returns(List.filter (fun x -> List.head goods <> x) goods) |> ignore
+
+        let sold = shop.Sell(goods)
+
+        Assert.That(not <| List.exists (fun x -> x = List.head goods) sold)
+
+[<Test>]
+let ``Not-selling item is not going to goods list on sell`` () =
+    FsCheck.Check.QuickThrowOnFailure testWithGoods
