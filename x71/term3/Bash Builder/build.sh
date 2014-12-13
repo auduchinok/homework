@@ -1,3 +1,4 @@
+#!/bin/bash
 # Eugene Auduchinok, 2014
 
 echo "Loading config.."
