@@ -120,7 +120,6 @@ namespace Hexic
 
 					Queue<Cell> next = new Queue<Cell> ();
 					next.Enqueue (cell);
-					cell.visited = true;
 
 					Queue<Cell> toRemove = new Queue<Cell> ();
 
@@ -133,6 +132,7 @@ namespace Hexic
 
 						current.visited = true;
 						toRemove.Enqueue (current);
+//						Console.WriteLine (toRemove.Count);
 
 						var sameNeighbours = Neighbours (current.column, current.row).Where (x => x.color == cell.color).ToList ();
 
@@ -143,26 +143,15 @@ namespace Hexic
 
 							next.Enqueue (same);
 						}
-
-//						foreach (Cell same in sameNeighbours) {
-//							if (!next.All (x => (x.column != same.column && x.row != same.row)))
-//								continue;
-//							if (!visited.All (x => (x.column != same.column && x.row != same.row)))
-//								continue;
-//
-//							if (!next.Contains (same) && !visited.Contains (same) && same != current && same != cell) {
-//								Console.WriteLine ("Add {0},{1}", same.column, same.row);
-//								next.Enqueue (same);
-//							}
-//						}
 					}
+
 
 					if (toRemove.Count >= 3) {
 						RemoveCells (toRemove);
 						removedCount += toRemove.Count;
 
-						i = 0;
-						j = 0;
+//						i = 0;
+//						j = 0;
 					}
 				}
 			}
@@ -174,10 +163,7 @@ namespace Hexic
 
 		void RemoveCells(Queue<Cell> toRemove)
 		{
-//			Console.Out.Flush();
-//			Console.WriteLine ("Remove cells");
-
-			while (toRemove.Any ()) {
+			while (toRemove.Count > 0) {
 				Cell cell = toRemove.Dequeue ();
 
 				int column = cell.column;
@@ -210,15 +196,13 @@ namespace Hexic
 			cell.row = row;
 			cell.color = rnd.Next (colors);
 			cell.exists = true;
+			cell.visited = false;
 
 			return cell;
 		}
 
 		List<Cell> Neighbours(int col, int row)
 		{
-//			Console.Out.Flush();
-//			Console.WriteLine ("Neighbours for {0},{1}", col, row);
-
 			List<Tuple<int, int>> neighbours = new List<Tuple<int,int>> {
 				Tuple.Create (col, row - 1),
 				Tuple.Create (col, row + 1),
@@ -291,8 +275,6 @@ namespace Hexic
 
 		void MakeTurn()
 		{
-			Console.WriteLine ("Make turn");
-
 			for (int i = 0; i < size - 1; i++) {
 				for (int j = 0; j < (size - 2) * 2 - 1; j++) {
 					int currentScore = score;
@@ -314,7 +296,13 @@ namespace Hexic
 		public void Play()
 		{
 			FindRepetitions ();
+
+//			Console.WriteLine (score);
+
 			score = 0;
+
+
+			Console.WriteLine ("Start game.");
 
 			for (int turn = 0; turn < turns; turn++) {
 				MakeTurn ();
