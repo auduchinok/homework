@@ -30,7 +30,7 @@ namespace Geometry.Core
             segmentA = createPoint(rnd);
             segmentB = createPoint(rnd);
 
-            circleRadius = rnd.Next(fieldSize / 4);
+            circleRadius = rnd.Next(fieldSize / 8, fieldSize / 4);
 
             buffer = new Bitmap(fieldSize, fieldSize);
             drawer = Graphics.FromImage(buffer);
@@ -49,20 +49,21 @@ namespace Geometry.Core
             var deltaX = x2 - x1;
             var deltaY = y2 - y1;
 
-            var a = Math.Pow(deltaX, 2) + Math.Pow(deltaY, 2);
-            var b = 2 * (Math.Abs(x1 - x) * deltaX + Math.Abs(y1 - y) * deltaY);
-            var c = Math.Pow(x1 - x, 2) + Math.Pow(y1 - y, 2) - Math.Pow(circleRadius, 2);
-            var d = b * b - 4 * a * c;
+			double a = Math.Pow (deltaX, 2) + Math.Pow (deltaY, 2);
+			double b = 2 * ((deltaX) * (x1 - x) + (deltaY) * (y1 - y));
+			double c = x * x + y * y + x1 * x1 + y1 * y1 - 2 * (x * x1 + y * y1) - circleRadius * circleRadius;
 
-            if (d < 0) {
-                return false;
-            }
-            else {
-                var res1 = (-b + Math.Sqrt(d)) / (2 * a);
-                var res2 = (-b - Math.Sqrt(d)) / (2 * a);
-                return (res1 >= 0 && res1 <= 1) || (res2 >= 0 && res2 <= 1);
-            }
+			if ( - b < 0)
+			{
+				return (c < 0);
+			}
 
+			if ( - b < (2 * a))
+			{
+				return (4 * a * c - b * b < 0);
+			}
+
+			return (a + b + c < 0);
         }
 
         public Bitmap Draw ()
