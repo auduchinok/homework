@@ -69,6 +69,8 @@
             this.Controls.Add(this.intersectLabel);
             this.Controls.Add(this.intersectPreview);
             this.Controls.Add(this.generateButton);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "Intersect";
             ((System.ComponentModel.ISupportInitialize)(this.intersectPreview)).EndInit();
