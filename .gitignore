@@ -5,6 +5,7 @@ Desktop.ini
 $RECYCLE.BIN/
 
 # Visual Studio files
+*.dbmdl
 *.[Oo]bj
 *.sln.docstates
 *.user
