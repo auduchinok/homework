@@ -1,0 +1,25 @@
+﻿@model IEnumerable<Conference.Models.Speech>
+
+@{
+    ViewBag.Title = "Главная";
+}
+
+<br />
+<div class="jumbotron">
+    <h2>Конференция</h2>
+    <p class="lead">Мы тут упоролись и решили провести классную конференцию. Ниже представлены доклады и немного тезисов к ним. Приходите участвовать и слушать. :)</p>
+    <p>
+        @Html.ActionLink("Добавить доклад", "Create")
+    </p>
+</div>
+
+<h2>Доклады</h2>
+<div class="row">
+    <div class="col-md-4">
+                 @foreach (var item in Model)
+                 {
+                    <h3>@Html.DisplayFor(modelItem => item.Title)</h3>
+            <p>@Html.DisplayFor(modelItem => item.Thesises)</p>
+        }
+    </div>
+</div>
