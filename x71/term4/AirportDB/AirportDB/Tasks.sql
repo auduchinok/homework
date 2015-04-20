@@ -13,7 +13,7 @@ select * from dbo.[Airplane] a where a.Seats > 100 order by a.Seats;
 
 
 --1.4. Выбрать номера и экипаж всех быстрых (быстрее скорости звука) самолетов, у которых в номере встречается число 19. Список упорядочить по номеру самолета.
-select * from dbo.[Airplane] a where a.Number like N'%19%';
+select * from dbo.[Airplane] a where a.Number like N'%19%' order by a.Number;
 
 
 -- 1.5. Выдать номера самолетов, фамилию заказчика и время отлета, улетевших с 11:00 до 23:00 1 июля 2014 года.
