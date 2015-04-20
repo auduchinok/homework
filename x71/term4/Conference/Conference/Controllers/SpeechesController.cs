@@ -18,8 +18,9 @@ namespace Conference.Controllers
 
         public ActionResult My()
         {
+            var userId = User.Identity.GetUserId();
             var speeches = from s in db.Speeches select s;
-            speeches.Where(s => s.UserId == User.Identity.GetUserId());
+            speeches = speeches.Where(s => s.UserId == userId);
 
             return View(speeches);
         }
