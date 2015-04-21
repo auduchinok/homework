@@ -21,17 +21,17 @@ select a.Number, c.SecondName, f.DepartureTime from dbo.[Airplane] a, dbo.[Custo
 
 
 -- 2.1 Посчитать общую сумму оплаты по всем выполненным заказам.
-select sum(o.Price) as TotalPrice from dbo.[Order] o;
+select sum(o.Price) as TotalPrice from dbo.[Order] o, dbo.[Flight] f where o.Canceled = 'FALSE' and f.DepartureTime < DATEADD(week, 1, SYSDATETIME());
 
 
 -- 2.2 Получить список экипажей, отсортированный по количеству выполненных заказов.
 select a.Number, o.Orders from dbo.Airplane a,
-	(select a.Id, count(o.Id) as Orders from dbo.[Airplane] a, dbo.[Flight] f, dbo.[Order] o where o.FlightId = f.Id and f.AirplaneId = a.Id group by a.Id) o
+	(select a.Id, count(o.Id) as Orders from dbo.[Airplane] a, dbo.[Flight] f, dbo.[Order] o where o.FlightId = f.Id and f.AirplaneId = a.Id and o.Canceled = 'FALSE' and f.DepartureTime < DATEADD(week, 1, SYSDATETIME()) group by a.Id) o
 		where a.Id = o.Id order by o.Orders desc;
 
 
 -- 2.3 Выбрать постоянных клиентов (не менее 5 выполненных заказов).
-select * from (select c.Id, count(o.Id) as Orders from dbo.[Customer] c, dbo.[Order] o where c.Id = o.CustomerId group by c.Id) c where c.Orders >= 5;
+select * from (select c.Id, count(o.Id) as Orders from dbo.[Customer] c, dbo.[Order] o, dbo.[Flight] f where c.Id = o.CustomerId and o.Canceled = 'FALSE' and f.DepartureTime < DATEADD(week, 1, SYSDATETIME()) group by c.Id) c where c.Orders >= 5;
 
 
 -- 3.1 Удалить клиента Попова.

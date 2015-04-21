@@ -29,8 +29,8 @@ insert into dbo.[Flight] ([Id], [Number], [Origin], [Destination], [DepartureTim
 (4, N'June', N'SCH', N'KRM', '2014-07-01 11:15', 2)
 
 
-insert into dbo.[Order] ([Id], [CustomerId], [CreatedAt], [FlightId], [Seats], [Price]) values
-(1, 3, '2015-04-08', 1, 2, 42),
-(2, 1, '2015-05-07', 1, 1, 3.14),
-(3, 3, '2014-02-01', 3, 4, 2.71),
-(4, 3, '2014-03-04', 4, 2, 123)
+insert into dbo.[Order] ([Id], [CustomerId], [CreatedAt], [FlightId], [Seats], [Price], [Canceled]) values
+(1, 3, '2015-04-08', 1, 2, 42, 0),
+(2, 1, '2015-05-07', 1, 1, 3.14, 0),
+(3, 3, '2014-02-01', 3, 4, 2.71, 0),
+(4, 3, '2014-03-04', 4, 2, 123, 1)
