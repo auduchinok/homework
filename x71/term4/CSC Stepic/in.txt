@@ -1,0 +1,14 @@
+     #>section2 .   key3
+[  section1   ]
+  key1 =   123
+key2=321
+key3=
+
+[section2]
+key1=   test
+#key2=777
+=  value
+=qwe
+
+[34f3]
+  34fw = 2f34r
