@@ -18,9 +18,9 @@ func init() {
 	var address string
 	var port int
 
-	flag.StringVar(&address, "address", DEFAULT_ADDRESS, "set server address")
-	flag.StringVar(&message, "message", "", "message to send")
-	flag.IntVar(&port, "port", DEFAULT_PORT, "set listening port")
+	flag.StringVar(&address, "a", DEFAULT_ADDRESS, "set server address")
+	flag.StringVar(&message, "m", "", "message to send")
+	flag.IntVar(&port, "p", DEFAULT_PORT, "set listening port")
 	flag.Parse()
 
 	full_address = address + ":" + strconv.Itoa(port)

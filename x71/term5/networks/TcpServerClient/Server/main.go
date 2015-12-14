@@ -12,7 +12,7 @@ const DEFAULT_PORT = 1024
 var port int
 
 func init() {
-	flag.IntVar(&port, "port", DEFAULT_PORT, "Set listening port.")
+	flag.IntVar(&port, "p", DEFAULT_PORT, "Set listening port.")
 	flag.Parse()
 }
 
