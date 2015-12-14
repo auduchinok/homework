@@ -37,7 +37,9 @@ func main() {
 		return
 	}
 
-	fmt.Println("Client: type message to send and press Return")
+	greeting, _ := bufio.NewReader(conn).ReadString('\n')
+	fmt.Print(greeting)
+
 	scanner := bufio.NewScanner(os.Stdin)
 	for scanner.Scan() {
 		fmt.Fprint(conn, scanner.Text() + "\n")

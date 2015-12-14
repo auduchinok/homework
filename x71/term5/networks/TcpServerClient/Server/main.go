@@ -17,6 +17,8 @@ func init() {
 }
 
 func handleConnection(conn net.Conn) {
+	fmt.Fprintln(conn, "Server: ready to accept messages")
+
 	scanner := bufio.NewScanner(conn)
 	for scanner.Scan() {
 		fmt.Println(scanner.Text())
