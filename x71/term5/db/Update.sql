@@ -7,13 +7,13 @@ insert into clients (id, name, phone_number, address, info) values ((select max(
 insert into orders (id, client_id, origin_city_id, destination_city_id, weight, cost)
 	values ((select max(id) + 1 from orders), (select id from clients where name = 'Eugene'), 4, 5, 49.36, 55.05)
 
- alter table K4_orders drop constraint FK_K4_orders_client
- alter table K4_orders add constraint FK_K4_orders_client foreign key (client_id) references K4_clients(id) on delete cascade
+alter table K4_orders drop constraint FK_K4_orders_client
+alter table K4_orders add constraint FK_K4_orders_client foreign key (client_id) references K4_clients(id) on delete cascade
 
- alter table K4_containers drop constraint FK_K4_containers_order
- alter table K4_containers add constraint FK_K4_containers_order foreign key (order_id) references K4_orders(id) on delete cascade
+alter table K4_containers drop constraint FK_K4_containers_order
+alter table K4_containers add constraint FK_K4_containers_order foreign key (order_id) references K4_orders(id) on delete cascade
 
- delete clients where name = 'Eugene'
+delete clients where name = 'Eugene'
 
 -- 3. Add additional info to the first client
 update clients set info = 'Meow' where id = 1
